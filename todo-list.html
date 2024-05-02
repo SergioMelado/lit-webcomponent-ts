@@ -15,6 +15,7 @@
         crossorigin="anonymous"></script>
 
         <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+<<<<<<< HEAD
         <script src="../node_modules/lit/polyfill-support.js"></script>
         <script type="module" src="../todo-list.js"></script>
 
@@ -50,5 +51,44 @@
                 <button type="button" onclick="onClickAddTask()" name="btn-save-task" disabled>Save</button>
             </form>
         </todo-list>
+=======
+    <script src="../node_modules/lit/polyfill-support.js"></script>
+    <script type="module" src="../todo-list.js"></script>
+
+    <script>
+        window.onload = (event) => {
+
+            const todoListElement = document.getElementsByTagName('todo-list');
+            todoListElement[0].addEventListener('create', handleCreate);
+        };
+
+        function handleCreate() {
+            document.getElementsByName('task-description')[0].removeAttribute("disabled");
+            document.getElementsByName('btn-save-task')[0].removeAttribute("disabled");
+        }
+
+        function onClickAddTask() {
+
+            const taskDescription = document.getElementsByName('task-description')[0].value;
+            const todoListElement = document.getElementsByTagName('todo-list')[0];
+            todoListElement.addTask(taskDescription);
+            document.getElementsByName('task-description')[0].value = "";
+            document.getElementsByName('task-description')[0].setAttribute("disabled", true);
+            document.getElementsByName('btn-save-task')[0].setAttribute("disabled", true);
+        }
+        
+
+    </script>
+
+    </head>
+    <body>
+        <form>
+            <input type="text" name="task-description"/>
+            <button type="button" onclick="onClickAddTask">Save</button>
+        </form>
+        <todo-list 
+            onCustomEvent="(e) => handleTodoList(e)"
+        />
+>>>>>>> d9bd3180890121e5f5564c8cbf0d5635097089e9
     </body>
 </html>

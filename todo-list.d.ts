@@ -9,6 +9,7 @@ export declare class TodoList extends LitElement {
     render(): import("lit-html").TemplateResult<1>;
     onClickCreate(): void;
     addTask(task: string): void;
+    private _modifyTask;
     removeTask(index: number): void;
     /**
      * @param titulo El titulo de la TO-DO List
