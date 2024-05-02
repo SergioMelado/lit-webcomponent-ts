@@ -9,7 +9,7 @@ import { customElement, property } from "lit/decorators.js";
 let TodoList = class TodoList extends LitElement {
     constructor() {
         super(...arguments);
-        this.todoListDefault = ["Hola", "Adios", "Jaja"];
+        this.todoListDefault = ['DatosTest1', 'DatosTest2', 'DatosTest3', 'DatosTest4'];
         /**
          * El titulo a poner en la lista por default
          */
@@ -18,16 +18,12 @@ let TodoList = class TodoList extends LitElement {
     render() {
         return html `
         <h1>${this.putTitle(this.titulo)}</h1>
-        <button @click=${this.onClickCreate} part="button">
-            CREATE
-        </button>
+        <button @click=${this.onClickCreate} part="button">CREATE</button>
+        <slot></slot>
         <ul>
             ${this.todoListDefault.map((value, index) => html `<li>${value} <button @click=${() => this.removeTask(index)} part="button">Remove</button></li>`)}
         </ul>
-        <br>
-        <button @click=${this._modifyTask} part="button">
-            Click here to modify a Task
-        </button>
+        <slot></slot>
         `;
     }
     onClickCreate() {
@@ -36,8 +32,6 @@ let TodoList = class TodoList extends LitElement {
     addTask(task) {
         this.todoListDefault.push(task);
         this.requestUpdate();
-    }
-    _modifyTask() {
     }
     removeTask(index) {
         this.todoListDefault.splice(index, 1);

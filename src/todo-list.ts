@@ -4,7 +4,7 @@ import { customElement, property } from "lit/decorators.js";
 @customElement('todo-list')
 export class TodoList extends LitElement {
 
-    todoListDefault = ["Hola", "Adios", "Jaja"];
+    todoListDefault = ['DatosTest1', 'DatosTest2', 'DatosTest3', 'DatosTest4'];
 
     static override styles = css`
     :host {
@@ -28,20 +28,17 @@ export class TodoList extends LitElement {
     override render() {
         return html`
         <h1>${this.putTitle(this.titulo)}</h1>
-        <button @click=${this.onClickCreate} part="button">
-            CREATE
-        </button>
+        <button @click=${this.onClickCreate} part="button">CREATE</button>
+        <slot></slot>
         <ul>
             ${this.todoListDefault.map((value, index) => html `<li>${value} <button @click=${() => this.removeTask(index)} part="button">Remove</button></li>`)}
         </ul>
-        <br>
-        <button @click=${this._modifyTask} part="button">
-            Click here to modify a Task
-        </button>
-        `
+        <slot></slot>
+        `;
     }
 
     onClickCreate() {
+
         this.dispatchEvent(new CustomEvent('create'));
     }
 
@@ -49,17 +46,12 @@ export class TodoList extends LitElement {
     
         this.todoListDefault.push(task);
         this.requestUpdate();
-
-    }
-
-    private _modifyTask() {
-
     }
 
     removeTask(index:number) {
+
         this.todoListDefault.splice(index, 1);
         this.requestUpdate();
-
     }
 
     /**
@@ -72,7 +64,9 @@ export class TodoList extends LitElement {
 }
 
 declare global {
+
     interface HTMLElementTagNameMap {
+
       'todo-list': TodoList;
     }
 }
